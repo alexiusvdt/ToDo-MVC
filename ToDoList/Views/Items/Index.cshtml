@@ -10,9 +10,20 @@
       crossorigin="anonymous">
   </head>
   <body>
-    <h1>Welcome to the To Do List!</h1>
-    <a href='/items/new'>Add a new item</a>
-    <br>
-    <a href='/items'>See list of items</a>
+    @using ToDoList.Models;
+
+      <h1>To Do List</h1>
+
+      @if (Model.Count == 0)
+      {
+        <p>There are no items in the list.</p>
+      }
+      <ul>
+        @foreach (Item item in Model)
+        {
+          <li>@item.Description</li>
+        }
+      </ul>
+    <a href="/items/new">Add a new item.</a>
   </body>
 </html>
