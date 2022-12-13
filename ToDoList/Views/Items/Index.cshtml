@@ -12,18 +12,22 @@
   <body>
     @using ToDoList.Models;
 
-      <h1>To Do List</h1>
-
-      @if (Model.Count == 0)
+    <h1>To Do List</h1>
+    @if (Model.Count == 0)
+    {
+      <p>There are no items in the list.</p>
+    }
+    <ul>
+      @foreach (Item item in Model)
       {
-        <p>There are no items in the list.</p>
+        <li>@item.Description</li>
       }
-      <ul>
-        @foreach (Item item in Model)
-        {
-          <li>@item.Description</li>
-        }
-      </ul>
+    </ul>
+
     <a href="/items/new">Add a new item.</a>
+
+    <form action="/items/delete" method="post">
+      <button type="submit" name="button">Clear All Items</button>
+    </form>
   </body>
 </html>
