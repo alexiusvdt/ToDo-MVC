@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My To-Do List!</title>
+    <link 
+      rel="stylesheet" 
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+      crossorigin="anonymous">
+  </head>
+  <body>
+    @using ToDoList.Models;
+
+    <h3>Here are all the items in this category:</h3>
+
+    <ol>
+    @foreach (Item item in @Model["items"])
+    {
+      <li><a href='/categories/@Model["category"].Id/items/@item.Id'>@item.Description</a></li>
+    }
+    </ol>
+
+    <h1>To Do List Item Details: </h1>
+
+    <h2>@Model["item"].Description</h2>
+    <h3>Category: @Model["category"].Name</h3>
+
+    <a href='/categories/@Model["category"].Id/items/new'>Add another item</a>
+    <a href='/categories'>View all categories</a>
+    <p><a href='/'>Return to Main Page</a></p>
+  </body>
+</html>
