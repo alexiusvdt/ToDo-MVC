@@ -25,34 +25,4 @@ namespace ToDoList.Controllers
       return View(model);
     }
   }
-
-    // removed as Items all belong to Category objects now
-    // impossible to just create an item
-    // [HttpGet("/items")]
-    // public ActionResult Index()
-    // {
-    //   List<Item> allItems = Item.GetAll();
-    //   return View(allItems);
-    // }
-    // [HttpPost("/items/delete")]
-    // public ActionResult DeleteAll()
-    // {
-    //   Item.ClearAll();
-    //   return View();
-    // }
-    // [HttpGet("/items/new")]
-    // public ActionResult New()
-    // {
-    //   return View();
-    // }    
-
-  //this is the old, original Show() method before 
-  // we housed Items in Categories
-  //  [HttpGet("/items/{id}")]
-  //   public ActionResult Show(int id)
-  //   {
-  //     Item foundItem = Item.Find(id);
-  //     return View(foundItem);
-  //   }    
-
 }
