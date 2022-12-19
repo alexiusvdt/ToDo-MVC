@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ToDoList.Models;
 using System.Collections.Generic;
 using System;
+using Microsoft.Extensions.Configuration;
 
 namespace ToDoList.Tests
 {
@@ -10,9 +11,19 @@ namespace ToDoList.Tests
   //idisposable extends itemtest class and provides the interface for clearing between tests
   public class ItemTests : IDisposable
   {
+    public IConfiguration Configuration { get; set; }
+
     public void Dispose()
     {
       Item.ClearAll();
+    }
+
+    public ItemTests()
+    {
+      IConfigurationBuilder builder = new ConfigurationBuilder()
+          .AddJsonFile("appsettings.json");
+      Configuration = builder.Build();
+      DBConfiguration.ConnectionString = Configuration["ConnectionStrings:TestConnection"];
     }
 
     [TestMethod]
