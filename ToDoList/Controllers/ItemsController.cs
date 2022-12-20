@@ -19,6 +19,7 @@ namespace ToDoList.Controllers
       List<Item> model = _db.Items.ToList();
       return View(model);
     }
+
     public ActionResult Create()
     {
       return View();
@@ -34,8 +35,8 @@ namespace ToDoList.Controllers
 
     public ActionResult Details(int id)
     {
-        Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        return View(thisItem);
+      Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      return View(thisItem);
     }
   }
 }

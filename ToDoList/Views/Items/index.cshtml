@@ -11,7 +11,11 @@
   <h3>No items have been added yet!</h3>
 } 
 
-@foreach (Item item in Model)
-{
-  <li>@item.Description</li>
-}
+<ul>
+  @foreach(Item item in Model)
+  {
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new item", "Create")</p>

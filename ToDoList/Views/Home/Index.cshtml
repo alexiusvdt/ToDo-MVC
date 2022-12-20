@@ -2,15 +2,5 @@
   Layout = "_Layout";
 }
 
-@using ToDoList.Models;
-
-<h1>Items</h1>
-
-<ul>
-  @foreach(Item item in Model)
-  {
-    <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
-  }
-</ul>
-
-<p>@Html.ActionLink("Add new item", "Create")</p> <!-- no reference to a controller needed-->
+<h1>Welcome to the To Do List!</h1>
+<p>@Html.ActionLink("See all items", "Index", "Items")</p> 
