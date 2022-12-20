@@ -2,6 +2,15 @@
   Layout = "_Layout";
 }
 
-    <h1>Welcome to the To Do List!</h1>
-    <h3><a href='/categories'>View categories</a></h3>
-    <h3><a href='/categories/new'>Add a new category</a></h3>
+@using ToDoList.Models;
+
+<h1>Items</h1>
+
+<ul>
+  @foreach(Item item in Model)
+  {
+    <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new item", "Create")</p> <!-- no reference to a controller needed-->
