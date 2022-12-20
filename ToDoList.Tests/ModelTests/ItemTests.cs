@@ -77,7 +77,9 @@ namespace ToDoList.Tests
       string description01 = "Walk the dog";
       string description02 = "Wash the dishes";
       Item newItem1 = new Item(description01);
+      newItem1.Save();
       Item newItem2 = new Item(description02);
+      newItem2.Save();
       List<Item> newList = new List<Item> { newItem1, newItem2 };
 
       //Act
@@ -110,21 +112,35 @@ namespace ToDoList.Tests
         Assert.AreEqual(firstItem.Description, copyOfFirstItem.Description);
       }      
 
-      // [TestMethod]
-      // public void Find_ReturnsCorrectItem_Item()
-      // {
-      //   //Arrange
-      //   string description01 = "Walk the dog";
-      //   string description02 = "Wash the dishes";
-      //   Item newItem1 = new Item(description01);
-      //   Item newItem2 = new Item(description02);
+      [TestMethod]
+      public void Save_SavesToDatabase_ItemList()
+      {
+        //Arrange
+        Item testItem = new Item("Mow the lawn");
 
-      //   //Act
-      //   Item result = Item.Find(2);
+        //Act
+        testItem.Save();
+        List<Item> result = Item.GetAll();
+        List<Item> testList = new List<Item>{testItem};
 
-      //   //Assert
-      //   Assert.AreEqual(newItem2, result);
-      // }
+        //Assert
+        CollectionAssert.AreEqual(testList, result);
+      }      
+
+      [TestMethod]
+          public void Find_ReturnsCorrectItemFromDatabase_Item()
+          {
+            //Arrange
+            Item newItem = new Item("Mow the lawn");
+            newItem.Save();
+            Item newItem2 = new Item("Wash dishes");
+            newItem2.Save();
+
+            //Act
+            Item foundItem = Item.Find(newItem.Id);
+            //Assert
+            Assert.AreEqual(newItem, foundItem);
+          }
     }
 }
 
