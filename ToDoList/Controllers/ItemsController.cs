@@ -55,8 +55,8 @@ namespace ToDoList.Controllers
 
     public ActionResult Delete(int id)
     {
-        Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        return View(thisItem);
+      Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      return View(thisItem);
     }
     
     //value delete on submit calls a POST specifically
