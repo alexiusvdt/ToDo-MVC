@@ -7,3 +7,17 @@ div#footer {
 	background:#333;
 	padding:8px;
 }
+
+body {
+	background-color: lightseagreen;
+}
+
+/* not working on build? */
+p {
+	font-family: monospace;
+	color: orangered;
+}
+
+a {
+	color: orangered;
+}
