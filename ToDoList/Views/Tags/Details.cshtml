@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<!-- @using ToDoList.Models -->
+@using ToDoList.Models
 @model ToDoList.Models.Tag
 
 <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
@@ -18,10 +18,16 @@ else
   @foreach(ItemTag join in Model.JoinEntities)
   {
     <li>@join.Item.Description</li>
+    @using (Html.BeginForm("DeleteJoin", "Tags"))
+    {
+      @Html.Hidden("joinId", @join.ItemTagId)
+      <input type="submit" value="Delete"/>
+    }
   }
   </ul>
 }
 
-<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
 <p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.TagId })</p>
+<p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
