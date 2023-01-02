@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout"
+  Layout = "_Layout";
 }
 
 @using ToDoList.Models;
@@ -10,7 +10,7 @@
 {
   <h3>No tags have been created yet!</h3>
 }
-
+else
 @foreach (Tag tag in Model)
 {
   <li>@Html.ActionLink($"{tag.Title}", "Details", new { id  = tag.TagId })</li> 

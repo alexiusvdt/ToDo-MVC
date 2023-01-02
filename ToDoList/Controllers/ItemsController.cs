@@ -46,8 +46,11 @@ namespace ToDoList.Controllers
     public ActionResult Details(int id)
     {
       Item thisItem = _db.Items
-                          .Include(item => item.Category)
-                          .FirstOrDefault(item => item.ItemId == id);
+        .Include(item => item.Category)
+        .Include(item => item.JoinEntities)
+        .ThenInclude(join => join.Tag)
+        .FirstOrDefault(item => item.ItemId == id);
+
       return View(thisItem);
     }
   
@@ -81,5 +84,26 @@ namespace ToDoList.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult AddTag(int id)
+    {
+      Item thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Title");
+      return View(thisItem);
+    }
+
+    [HttpPost]
+    public ActionResult AddTag(Item item, int tagId)
+    {
+      #nullable enable
+      ItemTag? joinEntity = _db.ItemTags.FirstOrDefault(join => (join.TagId == tagId && join.ItemId == item.ItemId));
+      #nullable disable
+      if (joinEntity == null && tagId != 0)
+      {
+        _db.ItemTags.Add(new ItemTag() { TagId = tagId, ItemId = item.ItemId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = item.ItemId });
+    }  
   }
 }
