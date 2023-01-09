@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ToDoList
 {
@@ -21,7 +22,14 @@ namespace ToDoList
                           )
                         )
                       );
-
+                                //Two models, designating USER and their ROLE
+      builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        //This method saves Identity user data via efcore to database (hence namespacecontext)
+        .AddEntityFrameworkStores<ToDoListContext>()
+        //sets up provider for tokens generated during pw reset or MFA
+        .AddDefaultTokenProviders();
+      
+      
       WebApplication app = builder.Build();
 
       // app.UseDeveloperExceptionPage();
@@ -29,6 +37,10 @@ namespace ToDoList
       app.UseStaticFiles();
 
       app.UseRouting();
+
+      //set up middleware svcs in proper sequence
+      app.UseAuthentication();
+      app.UseAuthorization();
 
       app.MapControllerRoute(
           name: "default",
