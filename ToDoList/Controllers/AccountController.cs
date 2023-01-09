@@ -4,7 +4,7 @@ using ToDoList.Models;
 using System.Threading.Tasks;
 using ToDoList.ViewModels;
 
-namespace ToDoList.AddControllersWithViews
+namespace ToDoList.Controllers
 {
   public class AccountController : Controller
   {
@@ -69,6 +69,5 @@ namespace ToDoList.AddControllersWithViews
         }
       }
     }
-  
   }
 }

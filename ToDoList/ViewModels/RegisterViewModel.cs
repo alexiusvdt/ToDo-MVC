@@ -2,13 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.ViewModels
 {
-  //RegisterViewModel is used because we don't want to save ConfirmPassword to ApplicationUser
-  //RVM can be used for validation and wont interfere with/change data in AppUser logic
   public class RegisterViewModel
   {
     [Required]
     [EmailAddress]
-    // Display() just changes how it's presented in UI
     [Display(Name = "Email Address")]
     public string Email { get; set; }
 

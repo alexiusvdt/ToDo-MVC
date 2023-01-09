@@ -28,24 +28,19 @@ namespace ToDoList
         .AddEntityFrameworkStores<ToDoListContext>()
         //sets up provider for tokens generated during pw reset or MFA
         .AddDefaultTokenProviders();
-      
-      builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<ToDoListContext>()
-          .AddDefaultTokenProviders();
 
       //temporary override for ease of dev testing.
       //NEVER LET THIS GO TO PROD
       //any ovverrides here need to match the [Regex()] validation attribute in the RVM.Password property
-      builder.Services.Configure<IdentityOptions>(options =>
-      {
-        // Default Password settings.
-        options.Password.RequireDigit = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequiredLength = 0;
-        options.Password.RequiredUniqueChars = 0;
-      });
+      // builder.Services.Configure<IdentityOptions>(options =>
+      // {
+      //   options.Password.RequireDigit = false;
+      //   options.Password.RequireLowercase = false;
+      //   options.Password.RequireNonAlphanumeric = false;
+      //   options.Password.RequireUppercase = false;
+      //   options.Password.RequiredLength = 0;
+      //   options.Password.RequiredUniqueChars = 0;
+      // });
       
       WebApplication app = builder.Build();
 
